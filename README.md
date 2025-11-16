@@ -4,7 +4,7 @@ Jupyter notebooks to ramp up (Level 200) and build practical knowledge of Micros
 
 ## 📑 Table of Contents
 - [Notebook 0: Quick Start](#notebook-0-quick-start)
-- [Notebook 1: Agents - Tools]()
+- [Notebook 1: Agents - Tools](#notebook-1-agents---tools)
 - [Notebook 2: Agents - Middleware]()
 - [Notebook 3: Agents - Observability]()
 - [Notebook 4: Agents - Memory]()
