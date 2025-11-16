@@ -19,7 +19,7 @@ This repo provides Jupyter notebooks to ramp up (Level 200) and build practical 
 - [Notebook 5: Agents - ]()
 
 ## Notebook 0: Quick Start
-This notebook, `AF_00_GettingStarted_QuickStart.ipynb`, provides general introduction to the Agentic Framework. It focuses on the core steps required to get a basic agent running.
+This notebook, `AF_00_GettingStarted_QuickStart.ipynb`, provides a general intro to the Agentic Framework. It covers the core steps required to get a basic agent running.
 
 - Configure your environment and set up necessary imports, incl. suppressing user warnings from `agent_framework_azure` Python package:
 
@@ -39,7 +39,7 @@ warnings.filterwarnings(
 )
 ```
 
-- Create an AI Client using _AzureAIAgentClient_ to connect to your Azure AI Foundry project:
+- Create an **AI Client** using _AzureAIAgentClient_ to connect to your Azure AI Foundry project:
 
 ``` Python
 ai_client = AzureAIAgentClient(
@@ -50,7 +50,7 @@ ai_client = AzureAIAgentClient(
 )
 ```
 
-- Instantiate a basic Chat Agent using the _ChatAgent_ class:
+- Instantiate a basic **Chat Agent** using the _ChatAgent_ class:
 
 ``` Python
 agent = ChatAgent(
@@ -70,7 +70,7 @@ async for streaming_update in agent_alt.run_stream(prompt_alt):
         print(streaming_update.text, end="", flush=True)
 ```
 
-The code creates a Haiku Poet Agent that responds to user queries with a haiku:
+The code creates a _Haiku Poet Agent_ that responds to user queries with a haiku:
 
 ``` JSON
 User: What is life?
@@ -81,3 +81,35 @@ Life blooms, then fades soft.
 ```
 
 ## Notebook 1: Agents - Tools
+This notebook, `AF_01_Agents_Tools_MCP.ipynb`, demonstrates how to integrate _tools_ with your AI agent, specifically demonstrating a **Hosted MCP** (_Model Context Protocol_) **Tool**. Tools allow your agents to access external information and perform actions.
+
+You will learn how to:
+- Define a Hosted MCP Tool by providing a _name_, _URL_ and setting the _approval_mode_ (e.g., "**never_require**").
+
+``` Python
+mcp_doc_tool = HostedMCPTool(
+    name = "Microsoft Learn MCP Tool",
+    url = "https://learn.microsoft.com/api/mcp",
+    approval_mode = "never_require"
+)
+```
+
+- Create an AI Agent and equip it with the defined tool by passing a list of tools to the _ai_client.create_agent()_ method.
+
+``` Python
+agent = ai_client.create_agent(
+    name = "Microsoft Documentation Agent",
+    instructions = "You are an agent, which can use its MCP documentation tool to answer end user questions about Microsoft products. Limit your response to 2 paragraphs.",
+    tools = [mcp_doc_tool]
+)
+```
+
+- Run the tool-equipped agent to answer a product-specific question, using external resource for a grounded answer.
+
+``` JSON
+User:
+How can I create a new Azure AI Foundry resource?
+
+Agent:
+To create a new Azure AI Foundry resource, you can use the Azure portal by following these steps: Go to the AI Foundry resource creation page in the Azure portal at https://portal.azure.com/#create/Microsoft.CognitiveServicesAIFoundry.
+```
