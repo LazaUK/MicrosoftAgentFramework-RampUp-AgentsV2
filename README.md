@@ -81,7 +81,7 @@ Life blooms, then fades soft.
 ```
 
 ## Notebook 1: Agents - Tools
-This notebook, `AF_01_Agents_Tools_MCP.ipynb`, demonstrates how to integrate _tools_ with your AI agent, specifically demonstrating a **Hosted MCP** (_Model Context Protocol_) **Tool**. Tools allow your agents to access external information and perform actions.
+This notebook, `AF_01_Agents_Tools_MCP.ipynb`, demonstrates how to integrate _tools_ with your AI agent, specifically focusing on a **Hosted MCP (Model Context Protocol) Tool**. Tools allow your agents to access external information and perform actions.
 
 You will learn how to:
 - Define a Hosted MCP Tool by providing a _name_, _URL_ and setting the _approval_mode_ (e.g., "**never_require**").
@@ -104,7 +104,7 @@ agent = ai_client.create_agent(
 )
 ```
 
-- Run the tool-equipped agent to answer a product-specific question, using external resource for a grounded answer.
+- Run the tool-equipped agent to answer a product-specific question, using the external resource for a grounded answer.
 
 ``` JSON
 User:
@@ -113,3 +113,12 @@ How can I create a new Azure AI Foundry resource?
 Agent:
 To create a new Azure AI Foundry resource, you can use the Azure portal by following these steps: Go to the AI Foundry resource creation page in the Azure portal at https://portal.azure.com/#create/Microsoft.CognitiveServicesAIFoundry.
 ```
+
+## Notebook 2: Agents - Middleware
+TBD
+
+## Notebook 3: Agents - Observability
+TBD
+
+## Notebook 4: Agents - Memory
+TBD
