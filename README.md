@@ -115,7 +115,48 @@ To create a new Azure AI Foundry resource, you can use the Azure portal by follo
 ```
 
 ## Notebook 2: Agents - Middleware
-TBD
+This notebook, `AF_02_Agents_Middleware.ipynb`, shows how to implement **agent middleware** to intercept and modify agent responses. Middleware provides a powerful way to enable content moderation, logging and result transformation without modifying core agent logic.
+
+You will learn how to:
+- Define **agent middleware** with the `@agent_middleware` decorator for a function that moderates agent outputs:
+
+``` Python
+@agent_middleware
+async def moderator_middleware(context, next):
+    """Agent middleware that moderates output by replacing 'badword' with '***'."""
+    print("Moderator: Starting agent run...")
+    
+    await next(context)
+    
+    if context.result is not None:
+        # Create moderated messages and replace inappropriate content
+        ...
+```
+
+- Attach middleware to an agent through the `middleware` parameter:
+
+``` Python
+agent = ai_client.create_agent(
+    name = "Storyteller Agent",
+    instructions = "You are a creative storyteller. Limit your responses to 1 paragraph.",
+    middleware = [moderator_middleware]
+)
+```
+
+- Verify that middleware intercepts agent execution, scans output for inappropriate content and automatically replaces it before the response is shared with the user.
+
+``` JSON
+User:
+Please, tell me a story about red panda.
+
+Moderator: Starting agent run...
+Moderator: Scanning agent output...
+Moderator: Replaced 2 occurrence(s) of inappropriate content
+Moderator: Moderation complete
+
+Agent:
+In the lush bamboo forests of the Himalayas lived a curious red panda named Riku who often found himself in sticky situations... [content with replaced words]
+```
 
 ## Notebook 3: Agents - Observability
 TBD
