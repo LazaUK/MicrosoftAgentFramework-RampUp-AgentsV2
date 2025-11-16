@@ -13,7 +13,7 @@ This repo provides Jupyter notebooks to ramp up (Level 200) and build practical 
 ## 📑 Table of Contents
 - [Notebook 0: Quick Start](#notebook-0-quick-start)
 - [Notebook 1: Agents - Tools](#notebook-1-agents---tools)
-- [Notebook 2: Agents - Middleware]()
+- [Notebook 2: Agents - Middleware](#notebook-2-agents---middleware)
 - [Notebook 3: Agents - Observability]()
 - [Notebook 4: Agents - Memory]()
 - [Notebook 5: Agents - ]()
