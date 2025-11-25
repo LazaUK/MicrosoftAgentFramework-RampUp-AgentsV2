@@ -42,7 +42,7 @@ warnings.filterwarnings(
 
 ``` Python
 ai_client = AzureAIClient(
-    agent_name = "Azure AI Agentic Client",
+    agent_name = "Azure-AI-Agentic-Client",
     project_endpoint = PROJECT_ENDPOINT,
     model_deployment_name = MODEL_DEPLOYMENT,
     async_credential = DefaultAzureCredential()
@@ -54,7 +54,7 @@ ai_client = AzureAIClient(
 ``` Python
 agent = ChatAgent(
     chat_client = ai_client,
-    name = "Haiku Poet Agent",
+    name = "Haiku-Poet-Agent",
     instructions = "You are a haiku poet. Respond to user queries with a haiku."
 )
 ```
@@ -87,7 +87,7 @@ You will learn how to:
 
 ``` Python
 mcp_doc_tool = HostedMCPTool(
-    name = "Microsoft Learn MCP Tool",
+    name = "Microsoft-Learn-MCP-Tool",
     url = "https://learn.microsoft.com/api/mcp",
     approval_mode = "never_require"
 )
@@ -97,7 +97,7 @@ mcp_doc_tool = HostedMCPTool(
 
 ``` Python
 agent = ai_client.create_agent(
-    name = "Microsoft Documentation Agent",
+    name = "Microsoft-Documentation-Agent",
     instructions = "You are an agent, which can use its MCP documentation tool to answer end user questions about Microsoft products. Limit your response to 2 paragraphs.",
     tools = [mcp_doc_tool]
 )
@@ -136,7 +136,7 @@ async def moderator_middleware(context, next):
 
 ``` Python
 agent = ai_client.create_agent(
-    name = "Storyteller Agent",
+    name = "Storyteller-Agent",
     instructions = "You are a creative storyteller. Limit your responses to 1 paragraph.",
     middleware = [moderator_middleware]
 )
