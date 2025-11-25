@@ -27,7 +27,7 @@ This notebook, `AF_00_GettingStarted_QuickStart.ipynb`, provides a general intro
 import os
 import asyncio
 from agent_framework import ChatAgent
-from agent_framework.azure import AzureAIAgentClient
+from agent_framework.azure import AzureAIClient
 from azure.identity.aio import DefaultAzureCredential
 
 import warnings
@@ -38,10 +38,10 @@ warnings.filterwarnings(
 )
 ```
 
-- Create an **AI Client** using _AzureAIAgentClient_ to connect to your Azure AI Foundry project:
+- Create an **AI Client** using _AzureAIClient_ to connect to your Azure AI Foundry project:
 
 ``` Python
-ai_client = AzureAIAgentClient(
+ai_client = AzureAIClient(
     agent_name = "Azure AI Agentic Client",
     project_endpoint = PROJECT_ENDPOINT,
     model_deployment_name = MODEL_DEPLOYMENT,
