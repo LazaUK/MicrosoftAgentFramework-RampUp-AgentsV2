@@ -14,7 +14,7 @@ This repo provides Jupyter notebooks to ramp up (Level 200) and build practical 
 - [Notebook 0: Quick Start](#notebook-0-quick-start)
 - [Notebook 1: Agents - Tools](#notebook-1-agents---tools)
 - [Notebook 2: Agents - Middleware](#notebook-2-agents---middleware)
-- [Notebook 3: Agents - Observability]()
+- [Notebook 3: Agents - Observability](#notebook-3-agents---observability)
 - [Notebook 4: Agents - Memory]()
 
 ## Notebook 0: Quick Start
@@ -158,7 +158,10 @@ In the lush bamboo forests of the Himalayas lived a curious red panda named Riku
 ```
 
 ## Notebook 3: Agents - Observability
-TBD
+
+![Observability_AppInsights](images/Observability_AppInsights.png)
+
+![Observability_Graphana](images/Observability_Graphana.png)
 
 ## Notebook 4: Agents - Memory
 TBD
