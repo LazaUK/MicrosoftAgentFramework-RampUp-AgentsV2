@@ -179,4 +179,48 @@ await ai_client.setup_azure_ai_observability()
 ![Observability_Graphana](images/Observability_Graphana.png)
 
 ## Notebook 4: Agents - Memory
-TBD
+This notebook, `AF_04_Agents_Memory.ipynb`, demonstrates how to achieve persistence in agent conversations by using thread _serialisation_ and _deserialisation_. The scenario simulates a hotel concierge agent that checks in a guest, loses its in-memory state and then recovers the conversation context to process a room service request.
+
+You will learn how to:
+- Create a new thread for a conversation:
+
+``` Python
+guest_thread = agent.get_new_thread()
+```
+
+- Serialise the thread state to save it to persistent storage (e.g., a JSON file) after the first interaction:
+
+``` Python
+serialised_thread_data = await guest_thread.serialize()
+
+# Save to file
+with open(FILE_NAME, "w") as f:
+    json.dump(serialised_thread_data, f, indent=4)
+```
+
+- Deserialise the thread state after the application restart to restore the conversation history into a new agent instance:
+
+``` Python
+# Load from file
+with open(FILE_NAME, "r") as f:
+    thread_data_reloaded = json.load(f)
+    
+restored_thread = await agent_new.deserialize_thread(thread_data_reloaded)
+```
+
+The whole conversation, including the app restart, may look like this:
+``` JSON
+User (Check-in):
+Hello, my name is Alex Reed and I am checking into room 1205.
+
+Agent:
+Welcome, Alex Reed! I have you checked into room 1205. If you need any assistance during your stay, feel free to ask. How can I help you today?
+
+... (Application Restart/Memory Cleared) ...
+
+User (Room Service):
+I would like to order room service: a club sandwich and a pot of tea.
+
+Agent:
+Certainly, Alex! I’ll place an order for a club sandwich and a pot of tea to be delivered to room 1205. Is there any particular time you would like this to be served?
+```
