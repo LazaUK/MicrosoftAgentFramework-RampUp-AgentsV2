@@ -1,7 +1,7 @@
 # Microsoft Agent Framework: Jupyter Notebooks for Ramp-Up Learning Process
 **Microsoft Agent Framework** is an open-source development kit for building _AI agents_ and _multi-agent workflows_. It combines and extends constructs and concepts from two other Microsoft agentic frameworks: _Semantic Kernel_ and _AutoGen_.
 
-This repo provides Jupyter notebooks to ramp up (Level 200) and build practical knowledge of Microsoft Agent Framework's _Python SDK_.
+This repo provides Jupyter notebooks to ramp up (Level 200: Agents V2) and build practical knowledge of Microsoft Agent Framework's _Python SDK_.
 
 > [!WARNING]
 > To successfully run these notebooks, you must have an **Azure AI Foundry** project and **AI model deployment**. Please ensure you have the following environment variables set up in your system:
