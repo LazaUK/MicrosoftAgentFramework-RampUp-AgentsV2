@@ -158,24 +158,24 @@ In the lush bamboo forests of the Himalayas lived a curious red panda named Riku
 ```
 
 ## Notebook 3: Agents - Observability
-This notebook, `AF_03_Agents_Observability.ipynb`, explains how to enable **Open Telemetry** on AI Foundry agent, so that any interactions with it are automatically logged in the connected _Azure Application Insights_ resource.
+This notebook, `AF_03_Agents_Observability.ipynb`, explains how to enable **Open Telemetry** on an AI Foundry agent, so that any interactions are automatically logged and can be viewed in the connected _Azure Application Insights_ resource.
 
-- Ensure that you install `azure-monitor-opentelemetry-exporter` Python package:
+- Ensure that you install the required `azure-monitor-opentelemetry-exporter` Python package:
 
-``` bash
+``` PowerShell
 pip install azure-monitor-opentelemetry-exporter
 ```
 
-- Open Telemetry can be auto enabled through AI Foundry's connected App Insights resource by calling the following Python function:
+- Open Telemetry can be auto-enabled through AI Foundry's connected App Insights resource by calling the following asynchronous function of the _AzureAIAgent_ class:
 
 ``` Python
 await ai_client.setup_azure_ai_observability()
 ```
 
-- You can now visualise collected traces in Azure Monitor, by using **Investigate -> Agents** section o Azure App Insights: 
+- You can now visualise the collected traces in Azure Monitor, by using the **Investigate -> Agents** menu section in Azure App Insights: 
 ![Observability_AppInsights](images/Observability_AppInsights.png)
 
-- Alternatively, thse traces can be visualised in a built-in Graphana dashboard as shown below:
+- Alternatively, these traces can be visualised in a built-in Graphana dashboard as shown below:
 ![Observability_Graphana](images/Observability_Graphana.png)
 
 ## Notebook 4: Agents - Memory
