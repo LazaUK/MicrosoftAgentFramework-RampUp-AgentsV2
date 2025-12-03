@@ -15,7 +15,7 @@ This repo provides Jupyter notebooks to ramp up (Level 200: Agents V2) and build
 - [Notebook 1: Agents - Tools](#notebook-1-agents---tools)
 - [Notebook 2: Agents - Middleware](#notebook-2-agents---middleware)
 - [Notebook 3: Agents - Observability](#notebook-3-agents---observability)
-- [Notebook 4: Agents - Memory]()
+- [Notebook 4: Agents - Memory](#notebook-4-agents---memory)
 
 ## Notebook 0: Quick Start
 This notebook, `AF_00_GettingStarted_QuickStart.ipynb`, provides a general intro to the Agentic Framework. It covers the core steps required to get a basic agent running.
