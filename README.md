@@ -17,6 +17,7 @@ This repo provides Jupyter notebooks to ramp up (Level 200: Agents V2) and build
 - [Notebook 2: Agents - Middleware](#notebook-2-agents---middleware)
 - [Notebook 3: Agents - Observability](#notebook-3-agents---observability)
 - [Notebook 4: Agents - Memory](#notebook-4-agents---memory)
+- [Notebook 5: Prompt Agents (Foundry Deployment)](#notebook-5-prompt-agents-foundry-deployment)
 
 ## Notebook 0: Quick Start
 This notebook, `AF_00_GettingStarted_QuickStart.ipynb`, provides a general intro to the Agent Framework. It covers the core steps required to get a basic agent running.
@@ -232,3 +233,7 @@ I would like to order room service: a club sandwich and a pot of tea.
 Agent:
 Certainly, Alex! I have placed an order for a club sandwich and a pot of tea to be delivered to room 402. Is there anything else you would like to add or any preferences for your tea?
 ```
+
+## Notebook 5: Prompt Agents (Foundry Deployment)
+This notebook, `AF_05_Agents_Foundry.ipynb`, demonstrates how to transition from local agent definitions to fully managed Foundry-based cloud configurations.
+
