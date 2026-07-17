@@ -122,22 +122,22 @@ The main difference between Prompt agents and Hosted agents in Microsoft Foundry
 This notebook, `AF_02_Agents_Middleware.ipynb`, shows how to implement **agent middleware** to intercept and modify agent responses. Middleware provides a powerful way to enable content moderation, logging and result transformation without modifying core agent logic.
 
 You will learn how to:
-- Define **agent middleware** with the `@agent_middleware` decorator for a function that moderates agent outputs:
+- Define **agent middleware** with the `@agent_middleware` decorator, to process AI agent's context:
 
 ``` Python
 @agent_middleware
 async def moderator_middleware(context, next):
     """Agent middleware that moderates output by replacing 'badword' with '***'."""
-    print("Moderator: Starting agent run...")
+    print("Moderator: Starting agent invocation...")
     
-    await next(context)
+    await next()
     
-    if context.result is not None:
-        # Create moderated messages and replace inappropriate content
+    if context.result and hasattr(context.result, "text"):
+        # Scans context.result and masks prohibited words
         ...
 ```
 
-- Attach middleware to an agent through the `middleware` parameter:
+- Attach the custom middleware to your agent profile using the *middleware* constructor parameter:
 
 ``` Python
 agent = ai_client.create_agent(
@@ -147,19 +147,18 @@ agent = ai_client.create_agent(
 )
 ```
 
-- Verify that middleware intercepts agent execution, scans output for inappropriate content and automatically replaces it before the response is shared with the user.
+- Intercept interactions, scans agent's output for inappropriate content and automatically replaces it before sharing the response with end users.
 
 ``` JSON
 User:
-Please, tell me a story about red panda.
+Please, tell me a story about a curious red panda.
 
-Moderator: Starting agent run...
-Moderator: Scanning agent output...
-Moderator: Replaced 2 occurrence(s) of inappropriate content
-Moderator: Moderation complete
+Moderator: Starting agent invocation...
+Moderator: Replaced prohibited words
+Moderator: Done
 
 Agent:
-In the lush bamboo forests of the Himalayas lived a curious red panda named Riku who often found himself in sticky situations... [content with replaced words]
+In the heart of a misty bamboo forest, a curious red panda named Kiko set out on an adventure. Every day, Kiko would scamper through the trees... ignoring the warnings of an old owl about a “***” lurking near...
 ```
 
 ## Notebook 3: Agents - Observability
