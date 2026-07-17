@@ -216,7 +216,7 @@ restored_session = AgentSession.from_dict(session_data_reloaded)
 response_final = await agent_new.run(PROMPT2, session=restored_session)
 ```
 
-The resulting state reconstruction outputs reflect flawless context restoration:
+- The resulting state reconstruction outputs reflect flawless context restoration:
 
 ``` JSON
 User (Check-in):
@@ -237,3 +237,48 @@ Certainly, Alex! I have placed an order for a club sandwich and a pot of tea to 
 ## Notebook 5: Prompt Agents (Foundry Deployment)
 This notebook, `AF_05_Agents_Foundry.ipynb`, demonstrates how to transition from local agent definitions to fully managed Foundry-based cloud configurations.
 
+You will learn how to:
+- Deploy a local agent blueprint to your Microsoft Foundry project as a versioned *prompt agent* asset:
+
+```python
+cloud_agent = await project_client.agents.create_version(
+    agent_name = agent.name,
+    description = agent.description,
+    definition = to_prompt_agent(agent),
+    headers = {"Accept-Encoding": "identity"}
+)
+```
+
+> [!IMPORTANT]
+> We pass an explicit `Accept-Encoding: identity` header workaround to ensure the response policy doesn't encounter network compression pipeline conflicts during deployment.
+
+- Instantiate a remote handle using the **FoundryAgent** class to run queries against your prompt agent in Foundry:
+
+``` Python
+deployed_agent = FoundryAgent(
+    project_endpoint = PROJECT_ENDPOINT,
+    agent_name = DEPLOYED_AGENT_NAME,
+    agent_version = DEPLOYED_AGENT_VERSION,
+    credential = DefaultAzureCredential()
+)
+```
+
+- Programmatically delete (for *housekeeping* purposes) the versioned prompt agent once your execution tests are complete:
+
+``` Python
+await project_client.agents.delete_version(
+    agent_name = DEPLOYED_AGENT_NAME,
+    agent_version = DEPLOYED_AGENT_VERSION,
+    headers = {"Accept-Encoding": "identity"}
+)
+```
+
+-- The resulting orchestration executes completely server-side, returning agent's prediction from Azure endpoint:
+
+``` JSON
+User: Will my Python code run successfully on the first try tomorrow?
+
+Agent:
+Ah, seeker of the code, the celestial stars whisper a tale of both challenge and triumph...
+On the dawn of your coding journey tomorrow, the moons hint at a gentle error or two, like hidden runes waiting to be deciphered. But with your keen insight and steady hand, these shadows shall vanish, revealing the true magic of your work.
+```
