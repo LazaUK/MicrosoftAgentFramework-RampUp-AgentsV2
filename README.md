@@ -140,7 +140,7 @@ async def moderator_middleware(context, next):
 - Attach the custom middleware to your agent profile using the *middleware* constructor parameter:
 
 ``` Python
-agent = ai_client.create_agent(
+agent = client.create_agent(
     name = "Storyteller-Agent",
     instructions = "You are a creative storyteller. Limit your responses to 1 paragraph.",
     middleware = [moderator_middleware]
@@ -162,18 +162,18 @@ In the heart of a misty bamboo forest, a curious red panda named Kiko set out on
 ```
 
 ## Notebook 3: Agents - Observability
-This notebook, `AF_03_Agents_Observability.ipynb`, explains how to enable **Open Telemetry** on an AI Foundry agent, so that any interactions are automatically logged and can be viewed in the connected _Azure Application Insights_ resource.
+This notebook, `AF_03_Agents_Observability.ipynb`, explains how to automatically *log interactions* to connected **Azure Application Insights** resource and visualise *telemetry metrics* natively.
 
 - Ensure that you install the required `azure-monitor-opentelemetry-exporter` Python package:
 
 ``` PowerShell
-pip install azure-monitor-opentelemetry-exporter
+pip install --upgrade azure-monitor-opentelemetry-exporter
 ```
 
-- Open Telemetry can be auto-enabled through AI Foundry's connected App Insights resource by calling the following asynchronous function of the _AzureAIAgent_ class:
+- Call the newly refactored async registration API method directly off your active *Foundry client* instance:
 
 ``` Python
-await ai_client.setup_azure_ai_observability()
+await client.configure_azure_monitor(enable_live_metrics=True)
 ```
 
 - You can now visualise the collected traces in Azure Monitor, by using the **Investigate -> Agents** menu section in Azure App Insights: 
