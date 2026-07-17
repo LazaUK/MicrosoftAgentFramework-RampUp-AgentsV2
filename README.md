@@ -183,42 +183,46 @@ await client.configure_azure_monitor(enable_live_metrics=True)
 ![Observability_Graphana](images/Observability_Graphana.png)
 
 ## Notebook 4: Agents - Memory
-This notebook, `AF_04_Agents_Memory.ipynb`, demonstrates how to achieve persistence in agent conversations by using thread _serialisation_ and _deserialisation_. The scenario simulates a hotel concierge agent that checks in a guest, loses its in-memory state and then recovers the conversation context to process a room service request.
+This notebook, `AF_04_Agents_Memory.ipynb`, demonstrates how to achieve chat session persistence using the Agent Framework's **AgentSession** state-sharing serialisation and deserialisation APIs (`to_dict()` and `from_dict()`). The scenario simulates a hotel concierge agent that checks in a guest, loses its in-memory state and then recovers the conversation context to process a room service request.
 
 You will learn how to:
-- Create a new thread for a conversation:
+- Create a trackable runtime session object:
 
 ``` Python
-guest_thread = agent.get_new_thread()
+guest_session = agent.create_session()
 ```
 
-- Serialise the thread state to save it to persistent storage (e.g., a JSON file) after the first interaction:
+- Serialise the session state to *JSON dictionary* to persist data on your local machine:
 
 ``` Python
-serialised_thread_data = await guest_thread.serialize()
+serialised_session_data = guest_session.to_dict()
 
-# Save to file
+# Save thread state to a local JSON file
+FILE_NAME = "concierge_session_memory.json"
 with open(FILE_NAME, "w") as f:
-    json.dump(serialised_thread_data, f, indent=4)
+    json.dump(serialised_session_data, f, indent=4)
 ```
 
-- Deserialise the thread state after the application restart to restore the conversation history into a new agent instance:
+- Rehydrate and deserialise the session state after the application restart:
 
 ``` Python
-# Load from file
 with open(FILE_NAME, "r") as f:
-    thread_data_reloaded = json.load(f)
+    session_data_reloaded = json.load(f)
     
-restored_thread = await agent_new.deserialize_thread(thread_data_reloaded)
+restored_session = AgentSession.from_dict(session_data_reloaded)
+
+# Execute ongoing prompts seamlessly by passing the session object
+response_final = await agent_new.run(PROMPT2, session=restored_session)
 ```
 
-The whole conversation, including the app restart, may look like this:
+The resulting state reconstruction outputs reflect flawless context restoration:
+
 ``` JSON
 User (Check-in):
-Hello, my name is Alex Reed and I am checking into room 1205.
+Hello, my name is Alex Reed and I am checking in.
 
 Agent:
-Welcome, Alex Reed! I have you checked into room 1205. If you need any assistance during your stay, feel free to ask. How can I help you today?
+Welcome, Alex Reed! It’s a pleasure to have you with us. I am assigning you room 402. If you need any assistance or information during your stay, please don't hesitate to ask. Enjoy your stay!
 
 ... (Application Restart/Memory Cleared) ...
 
@@ -226,5 +230,5 @@ User (Room Service):
 I would like to order room service: a club sandwich and a pot of tea.
 
 Agent:
-Certainly, Alex! I’ll place an order for a club sandwich and a pot of tea to be delivered to room 1205. Is there any particular time you would like this to be served?
+Certainly, Alex! I have placed an order for a club sandwich and a pot of tea to be delivered to room 402. Is there anything else you would like to add or any preferences for your tea?
 ```
