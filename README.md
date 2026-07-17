@@ -4,6 +4,10 @@
 
 This repo provides Jupyter notebooks to ramp up (Level 200: Agents V2) and build practical skills of using Microsoft Agent Framework's _Python SDK_.
 
+___
+🎧 A series of **_audio podcasts_** will be also published [here](https://www.youtube.com/playlist?list=PLN4Ujajh8d4g) to review the content of the provided Jupyter notebooks.
+___
+
 > [!WARNING]
 > To successfully run these notebooks, you must have an **Microsoft Foundry** project and **AI model deployment** in Azure. Please ensure you have the following environment variables set up in your system:
 > | Environment Variable             | Description                                                                     |
