@@ -273,7 +273,7 @@ await project_client.agents.delete_version(
 )
 ```
 
--- The resulting orchestration executes completely server-side, returning agent's prediction from Azure endpoint:
+- The resulting orchestration executes completely server-side, returning agent's prediction from Azure endpoint:
 
 ``` JSON
 User: Will my Python code run successfully on the first try tomorrow?
