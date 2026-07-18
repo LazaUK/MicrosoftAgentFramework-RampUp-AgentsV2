@@ -5,7 +5,7 @@
 This repo provides Jupyter notebooks to ramp up (Level 200: Agents V2) and build practical skills of using Microsoft Agent Framework's _Python SDK_.
 
 ___
-🎧 A series of **_audio podcasts_** will be also published [here](https://www.youtube.com/playlist?list=PLN4Ujajh8d4g) to review the content of the provided Jupyter notebooks.
+🎧 A series of **_audio podcasts_** will be auto-generated and then published [here](https://www.youtube.com/playlist?list=PLN4Ujajh8d4g) to review the content of the provided Jupyter notebooks.
 ___
 
 > [!WARNING]
