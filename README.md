@@ -28,6 +28,9 @@ This notebook, `AF_00_GettingStarted_QuickStart.ipynb`, provides a general intro
 
 - Configure your environment and set up necessary imports using the `agent_framework` package:
 
+> [!NOTE]
+> These notebooks were tested with specific version of Agent Framework, v1.11.0. To ensure reproducible output, please install Agent Framework with `pip install --force-reinstall agent-framework==1.11.0`.
+
 ``` Python
 # Import required packages
 import os
